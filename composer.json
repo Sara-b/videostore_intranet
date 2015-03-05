@@ -1,0 +1,15 @@
+{
+    "name": "videostore",
+    "description": "RESTful API for videostore management",
+    "require": {
+        "slim/slim": "2.*"
+    },
+    "archive": {
+        "exclude": ["vendor", ".DS_Store", "*.log"]
+    },
+    "autoload": {
+        "psr-0": {
+            "API": "lib/"
+        }
+    }
+}
