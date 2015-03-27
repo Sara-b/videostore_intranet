@@ -2,7 +2,8 @@
     "name": "videostore",
     "description": "RESTful API for videostore management",
     "require": {
-        "slim/slim": "2.*"
+        "slim/slim": "2.*",
+        "entomb/slim-json-api": "dev-master"
     },
     "archive": {
         "exclude": ["vendor", ".DS_Store", "*.log"]
