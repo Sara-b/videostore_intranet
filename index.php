@@ -5,6 +5,9 @@
   require 'connection_bdd.php';
   //require my models
   require 'models/Movie.php';
+  require 'models/Customer.php';
+  require 'models/Store.php';
+  require 'models/Rental.php';
 
   // set up database connection
   R::setup('mysql:host=localhost;dbname=videostore','root','');
@@ -55,6 +58,71 @@
     $app->response()->header('Content-Type', 'application/json');
     echo json_encode($movie);
   });  
+
+
+  //CUSTOMERS
+  //GET all customers 
+  $app->get('/users', function () use ($app) {  
+    $users = Customer::get_all_users(); 
+    $app->response()->header('Content-Type', 'application/json');
+    echo json_encode($users);
+  });
+
+  //Fet User by id
+   $app->get('/users/:id', function ($id) use ($app) {  
+    $user = Customer::get_user_by_id($id); 
+    $app->response()->header('Content-Type', 'application/json');
+    echo json_encode($user);
+  });
+
+
+   //STORES
+  //GET all stores 
+  $app->get('/magasins', function () use ($app) {  
+    $stores = Store::get_all_store(); 
+    $app->response()->header('Content-Type', 'application/json');
+    echo json_encode($stores);
+  });
+
+  //Get User by id
+   $app->get('/magasins/:id', function ($id) use ($app) {  
+    $store = Store::get_store_by_id($id); 
+    $app->response()->header('Content-Type', 'application/json');
+    echo json_encode($store);
+  });
+
+
+
+   //RENTALS
+  //GET all rentals 
+  $app->get('/locations', function () use ($app) {  
+    $rentals = Rental::get_all_rental(); 
+    $app->response()->header('Content-Type', 'application/json');
+    echo json_encode($rentals);
+  });
+
+  //Get Rental by id
+   $app->get('/locations/:id', function ($id) use ($app) {  
+    $rental = Rental::get_rental_by_id($id); 
+    $app->response()->header('Content-Type', 'application/json');
+    echo json_encode($rental);
+  });
+
+   //Get Rental by user
+   $app->get('/locations/user/:id', function ($id) use ($app) {  
+    $rentals = Rental::get_rental_by_user($id); 
+    $app->response()->header('Content-Type', 'application/json');
+    echo json_encode($rentals);
+  });
+
+   //Get Rental by copy
+   $app->get('/locations/copy/:id', function ($id) use ($app) {  
+    $rentals = Rental::get_rental_by_copy($id); 
+    $app->response()->header('Content-Type', 'application/json');
+    echo json_encode($rentals);
+  });
+
+
 
 
 
