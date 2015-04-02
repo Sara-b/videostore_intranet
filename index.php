@@ -9,6 +9,8 @@
   require 'models/Customer.php';
   require 'models/Store.php';
   require 'models/Rental.php';
+  require 'models/Administrator.php';
+  require 'models/category.php';
 
   // set up database connection
   R::setup('mysql:host=localhost;dbname=videostore','root','');
@@ -61,6 +63,16 @@
   });  
 
 
+
+  //CATEGORIES
+  //GET all categories 
+  $app->get('/categories', function () use ($app) {  
+    $categories = Category::get_all_categories(); 
+    $app->response()->header('Content-Type', 'application/json');
+    echo json_encode($categories);
+  });
+
+
   //CUSTOMERS
   //GET all customers 
   $app->get('/users', function () use ($app) {  
@@ -89,17 +101,16 @@
     echo json_encode($user);
   });
 
-
    //STORES
   //GET all stores 
-  $app->get('/stores', function () use ($app) {  
+  $app->get('/magasins', function () use ($app) {  
     $stores = Store::get_all_store(); 
     $app->response()->header('Content-Type', 'application/json');
     echo json_encode($stores);
   });
 
-  //Get User by id
-   $app->get('/stores/:id', function ($id) use ($app) {  
+  //Get store by id
+   $app->get('/magasins/:id', function ($id) use ($app) {  
     $store = Store::get_store_by_id($id); 
     $app->response()->header('Content-Type', 'application/json');
     echo json_encode($store);
@@ -107,35 +118,27 @@
 
 
 
-   //RENTALS
-  //GET all rentals 
-  $app->get('/locations', function () use ($app) {  
-    $rentals = Rental::get_all_rental(); 
+   //ADMINISTRATOR
+  //GET all admins 
+  $app->get('/employes', function () use ($app) {  
+    $administrators = Administrator::get_all_administrators(); 
     $app->response()->header('Content-Type', 'application/json');
-    echo json_encode($rentals);
+    echo json_encode($administrators);
   });
 
-  //Get Rental by id
-   $app->get('/locations/:id', function ($id) use ($app) {  
-    $rental = Rental::get_rental_by_id($id); 
+  //Get admin by id
+   $app->get('/employes/:id', function ($id) use ($app) {  
+    $administrator = Administrator::get_administrator_by_id($id); 
     $app->response()->header('Content-Type', 'application/json');
-    echo json_encode($rental);
+    echo json_encode($administrator);
   });
 
-   //Get Rental by user
-   $app->get('/locations/user/:id', function ($id) use ($app) {  
-    $rentals = Rental::get_rental_by_user($id); 
+   //Get admins by user
+   $app->get('/employes/store/:id', function ($store_id) use ($app) {  
+    $administrators = Administrator::get_administrators_by_store($store_id); 
     $app->response()->header('Content-Type', 'application/json');
-    echo json_encode($rentals);
+    echo json_encode($administrators);
   });
-
-   //Get Rental by copy
-   $app->get('/locations/copy/:id', function ($id) use ($app) {  
-    $rentals = Rental::get_rental_by_copy($id); 
-    $app->response()->header('Content-Type', 'application/json');
-    echo json_encode($rentals);
-  });
-
 
 
   $app->run();
