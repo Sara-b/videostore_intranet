@@ -2,7 +2,6 @@
   session_start();
   //require composer autoload (load all my libraries)
   require 'vendor/autoload.php';
-  require 'rb.php';
   require 'connection_bdd.php';
   //require my models
   require 'models/Movie.php';
@@ -11,10 +10,6 @@
   require 'models/Rental.php';
   require 'models/Administrator.php';
   require 'models/category.php';
-
-  // set up database connection
-  R::setup('mysql:host=localhost;dbname=videostore','root','');
-  R::freeze(true);
 
   // Slim initialisation
   $app = new \Slim\Slim();
@@ -36,9 +31,9 @@
   //VIDEOS
   //GET all videos 
   $app->get('/videos', function () use ($app) {  
-    $movies = R::findAll('movies'); 
+    $movies = Movie::get_all_movies('movies'); 
     $app->response()->header('Content-Type', 'application/json');
-    echo json_encode(R::exportAll($movies));
+    echo json_encode($movies);
   });
 
   //GET video by id
@@ -90,6 +85,7 @@
 
   //Connexion
    $app->post('/users/connexion', function () use ($app) {  
+    var_dump($_POST);
     $user = Customer::connexion($_POST['mail'],$_POST['password']); 
     $app->response("connexion reussie")->header('Content-Type', 'application/json');
     echo json_encode($user);
