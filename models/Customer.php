@@ -46,6 +46,65 @@ class Customer
     return true;
   }
 
+  public static function connexion($mail,$password){
+    global $bdd;
+    
+    //on passe par le formulaire
+    if(isset($mail) AND $mail!="" AND isset($password) AND $password!="") // On a le pseudo et mdp
+      {
+        // On récupère tout le contenu de la table 
+        $req = $bdd->prepare('SELECT * FROM customers WHERE mail=:mail AND password=:password'); 
+        //on passe en paramètre de la requete nos variables $_POST
+        $req->execute(array(
+          'mail' => $mail,
+          'password' => $password
+          ));
+        /*if($donnees=$req->fetchAll(PDO::FETCH_OBJ)){  
+          $_SESSION['id']=$donnees['id'];
+          $_SESSION['mail']=$donnees['mail'];
+          $_SESSION['first_name']=$donnees['first_name'];
+          $_SESSION['last_name']=$donnees['last_name'];
+        */
+        if($user=$req->fetch(PDO::FETCH_OBJ)){
+          return $user;
+        }
+        else return false;
+          
+      }
+      else{
+        return false;
+      }
+  }
+
+  public static function connexion2($mail){
+    global $bdd;
+    
+    //on passe par le formulaire
+    if(isset($mail) AND $mail!="" ) // On a le pseudo et mdp
+      {
+        // On récupère tout le contenu de la table 
+        $req = $bdd->prepare('SELECT * FROM customers WHERE mail=:mail'); 
+        //on passe en paramètre de la requete nos variables $_POST
+        $req->execute(array(
+          'mail' => $mail
+          ));
+        /*if($donnees=$req->fetchAll(PDO::FETCH_OBJ)){  
+          $_SESSION['id']=$donnees['id'];
+          $_SESSION['mail']=$donnees['mail'];
+          $_SESSION['first_name']=$donnees['first_name'];
+          $_SESSION['last_name']=$donnees['last_name'];
+        */
+        if($user=$req->fetchAll(PDO::FETCH_OBJ)){
+          return $user;
+        }
+        else return false;
+          
+      }
+      else{
+        return false;
+      }
+  }
+
 
 }
 

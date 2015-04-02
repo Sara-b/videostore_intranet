@@ -1,4 +1,5 @@
-<?php 
+<?php  header("Access-Control-Allow-Origin: *");
+  session_start();
   //require composer autoload (load all my libraries)
   require 'vendor/autoload.php';
   require 'rb.php';
@@ -68,24 +69,37 @@
     echo json_encode($users);
   });
 
-  //Fet User by id
+  //Get User by id
    $app->get('/users/:id', function ($id) use ($app) {  
     $user = Customer::get_user_by_id($id); 
     $app->response()->header('Content-Type', 'application/json');
     echo json_encode($user);
   });
 
+  //Connexion
+   $app->post('/users/connexion', function () use ($app) {  
+    $user = Customer::connexion($_POST['mail'],$_POST['password']); 
+    $app->response("connexion reussie")->header('Content-Type', 'application/json');
+    echo json_encode($user);
+  });
+     //Connexion
+   $app->get('/users/connexion/:mail', function ($mail) use ($app) {  
+    $user = Customer::connexion2($mail); 
+    $app->response("connexion reussie")->header('Content-Type', 'application/json');
+    echo json_encode($user);
+  });
+
 
    //STORES
   //GET all stores 
-  $app->get('/magasins', function () use ($app) {  
+  $app->get('/stores', function () use ($app) {  
     $stores = Store::get_all_store(); 
     $app->response()->header('Content-Type', 'application/json');
     echo json_encode($stores);
   });
 
   //Get User by id
-   $app->get('/magasins/:id', function ($id) use ($app) {  
+   $app->get('/stores/:id', function ($id) use ($app) {  
     $store = Store::get_store_by_id($id); 
     $app->response()->header('Content-Type', 'application/json');
     echo json_encode($store);
@@ -123,21 +137,6 @@
   });
 
 
-
-
-
-/*Return JSON*/
-// handle GET requests for /articles
-$app->get('/movies/:id', function ($id) use ($app) {  
-  // query database for all movies
-  $movies = Movie::get_movie_by_id($id); 
-  
-  // send response header for JSON content type
-  $app->response()->header('Content-Type', 'application/json');
-  
-  // return JSON-encoded response body with query results
-  echo json_encode($movies);
-  });
 
   $app->run();
 ?>
