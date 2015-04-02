@@ -16,7 +16,9 @@ class Movie
   public static function get_movie_by_id($id){
     global $bdd;
     
-    $requete = $bdd->prepare("SELECT * FROM movies WHERE id=:id");
+    $requete = $bdd->prepare("SELECT * FROM movies 
+                                LEFT JOIN directors ON directors.id = movies.id_director
+                                WHERE movies.id=:id");
       // l'execution 
     $requete->bindParam(':id', $id);
     $requete->execute();
