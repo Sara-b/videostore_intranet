@@ -102,11 +102,11 @@
             <div class="row">
                 <div class="col-md-4">
                     <label>Identifiant : </label>
-                        <input type="text" class="form-control" />
+                        <input type="text" class="form-control" id="mail" name="mail"/>
                         <label>Mot de Passe :  </label>
-                        <input type="password" class="form-control" />
+                        <input type="password" class="form-control" id="mdp" name="mdp"/>
                         <hr />
-                        <a href="index.html" class="btn btn-info"><span class="glyphicon glyphicon-user"></span> &nbsp;Connexion </a>&nbsp;
+                        <a onclick="connexion()" class="btn btn-info"><span class="glyphicon glyphicon-user"></span> &nbsp;Connexion </a>&nbsp;
                 </div>
             </div>
         </div>
@@ -128,5 +128,47 @@
     <script src="assets/js/jquery-1.11.1.js"></script>
     <!-- BOOTSTRAP SCRIPTS  -->
     <script src="assets/js/bootstrap.js"></script>
+    <script>
+        function getXMLHttpRequest() {
+            var xhr = null;
+            
+            if (window.XMLHttpRequest || window.ActiveXObject) {
+                if (window.ActiveXObject) {
+                    try {
+                        xhr = new ActiveXObject("Msxml2.XMLHTTP");
+                    } catch(e) {
+                        xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                } else {
+                    xhr = new XMLHttpRequest(); 
+                }
+            } else {
+                alert("Votre navigateur ne supporte pas l'objet XMLHTTPRequest...");
+                return null;
+            }
+            
+            return xhr;
+            }
+
+        function connexion() {
+            var xhr = getXMLHttpRequest();
+
+            var mail = encodeURIComponent(document.getElementById("mail").value);
+            var mdp = encodeURIComponent(document.getElementById("mdp").value);
+            
+            xhr.onreadystatechange = function() {
+            
+                if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
+                    document.location.href = "http://app.videostore.fr/index.html";
+                }
+            };
+            var params = "mail="+mail+"&password="+mdp;
+            xhr.open("POST","http://api.videostore.fr/users/connexion",true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.send(params);
+            return false;
+        }
+
+    </script>
 </body>
 </html>
