@@ -1,43 +1,84 @@
 function getXMLHttpRequest() {
-            var xhr = null;
-            
-            if (window.XMLHttpRequest || window.ActiveXObject) {
-                if (window.ActiveXObject) {
-                    try {
-                        xhr = new ActiveXObject("Msxml2.XMLHTTP");
-                    } catch(e) {
-                        xhr = new ActiveXObject("Microsoft.XMLHTTP");
-                    }
-                } else {
-                    xhr = new XMLHttpRequest(); 
-                }
-            } else {
-                alert("Votre navigateur ne supporte pas l'objet XMLHTTPRequest...");
-                return null;
+    var xhr = null;
+    
+    if (window.XMLHttpRequest || window.ActiveXObject) {
+        if (window.ActiveXObject) {
+            try {
+                xhr = new ActiveXObject("Msxml2.XMLHTTP");
+            } catch(e) {
+                xhr = new ActiveXObject("Microsoft.XMLHTTP");
             }
-            
-            return xhr;
-            }
-
-        function connexion() {
-            var xhr = getXMLHttpRequest();
-
-            var mail = encodeURIComponent(document.getElementById("mail").value);
-            var mdp = encodeURIComponent(document.getElementById("mdp").value);
-            
-            xhr.onreadystatechange = function() {
-            
-                if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
-                    var data = JSON.parse(xhr.responseText);
-                    if(data)
-                        document.location.href = "http://app.videostore.fr/index.html";
-                    else
-                        alert("Identifiant ou mot de passe incorrect.\n Merci de réessayer.");
-                }
-            };
-            var params = "mail="+mail+"&password="+mdp;
-            xhr.open("POST","http://api.videostore.fr/users/connexion",true);
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            xhr.send(params);
-            return false;
+        } else {
+            xhr = new XMLHttpRequest(); 
         }
+    } else {
+        alert("Votre navigateur ne supporte pas l'objet XMLHTTPRequest...");
+        return null;
+    }
+    
+    return xhr;
+}
+
+function connexion() {
+    var xhr = getXMLHttpRequest();
+
+    var mail = encodeURIComponent(document.getElementById("mail").value);
+    var mdp = encodeURIComponent(document.getElementById("mdp").value);
+    
+    xhr.onreadystatechange = function() {
+    
+        if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
+            var data = JSON.parse(xhr.responseText);
+            if(data)
+                document.location.href = "http://app.videostore.fr/index.html";
+            else
+                alert("Identifiant ou mot de passe incorrect.\n Merci de réessayer.");
+        }
+    };
+    var params = "mail="+mail+"&password="+mdp;
+    xhr.open("POST","http://api.videostore.fr/users/connexion",true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send(params);
+    return false;
+}
+
+function getMovies() {
+    var data;
+    var xhr = getXMLHttpRequest();
+    
+    xhr.onreadystatechange = function() {
+    
+        if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
+            data = JSON.parse(xhr.responseText);
+            for(i=0;i<data.length;i++){
+                var nouvelleLigne = document.getElementById("monBody").insertRow(-1);
+                function ajouterLigne()
+                {
+                    var tableau = document.getElementById("list_movies");
+
+                    var ligne = tableau.insertRow(-1);//on a ajouté une ligne
+
+                    var colonne1 = ligne.insertCell(0);//on a une ajouté une cellule
+                    colonne1.innerHTML += data[i].id;//on y met le contenu de id
+
+                    var colonne2 = ligne.insertCell(1);//on ajoute la seconde cellule
+                    colonne2.innerHTML += data[i].title;
+
+                    var date = new Date();
+                    var colonne3 = ligne.insertCell(2);
+                    colonne3.innerHTML += data[i].description;;//on ajoute le jour du mois
+
+                    var colonne4 = ligne.insertCell(3);
+                    colonne4.innerHTML += date.getFullYear();//les mois commencent par 0
+                }
+            }
+            if(data)
+                alert(data);
+            //document.getElementById("myDiv").innerHTML= xhr.responseText;
+        }
+    };
+    xhr.open("GET","http://api.videostore.fr/videos",true);
+    xhr.send();
+
+    return false;
+}
