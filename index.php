@@ -107,6 +107,7 @@
                         <input type="password" class="form-control" id="mdp" name="mdp"/>
                         <hr />
                         <a onclick="connexion()" class="btn btn-info"><span class="glyphicon glyphicon-user"></span> &nbsp;Connexion </a>&nbsp;
+                       
                 </div>
             </div>
         </div>
@@ -159,7 +160,11 @@
             xhr.onreadystatechange = function() {
             
                 if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
-                    document.location.href = "http://app.videostore.fr/index.html";
+                    var data = JSON.parse(xhr.responseText);
+                    if(data)
+                        document.location.href = "http://app.videostore.fr/index.html";
+                    else
+                        alert("Identifiant ou mot de passe incorrect.\n Merci de réessayer.");
                 }
             };
             var params = "mail="+mail+"&password="+mdp;
