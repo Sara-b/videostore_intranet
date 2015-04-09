@@ -90,59 +90,156 @@
 
                 </div>
 
-            </div>
             <div class="row">
                 <div class="col-md-12">
                 </div>
+            </div>
 
+                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                  Ajouter un utilisateur
+                </button>
+                <div class="collapse" id="collapseExample">
+                  <div class="well">
+                    
+                    <form class="form-horizontal">
+                    <fieldset>
+
+                    
+                    <div class="row">
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                      <label class="col-md-2 control-label" for="last_name">Nom</label>  
+                      <div class="col-md-2">
+                        <input id="last_name" name="last_name" type="text" placeholder="Nom" class="form-control input-md">
+                      </div>
+                      <label class="col-md-1 control-label" for="first_name">Prenom</label>  
+                      <div class="col-md-2">
+                        <input id="first_name" name="first_name" type="text" placeholder="Prenom" class="form-control input-md">
+                      </div>
+                    </div>
+
+                    <!-- Password input-->
+                    <div class="form-group">
+                      <label class="col-md-2 control-label" for="password">Mot de passe</label>
+                      <div class="col-md-4">
+                        <input id="password" name="password" type="password" placeholder="Mot de passe" class="form-control input-md">
+                        
+                      </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                      <label class="col-md-2 control-label" for="mail">Mail</label>  
+                      <div class="col-md-4">
+                      <input id="mail" name="mail" type="text" placeholder="Mail" class="form-control input-md">
+                        
+                      </div>
+                    </div>
+
+                    <!-- Select Basic -->
+                    <div class="form-group">
+                      <label class="col-md-2 control-label" for="country">Pays</label>
+                      <div class="col-md-4">
+                        <select id="country" name="country" class="form-control">
+                          <option value="1">Option one</option>
+                          <option value="2">Option two</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                      <label class="col-md-2 control-label" for="postalCode">Code Postal</label>
+                      <div class="col-md-2">
+                        <input id="postalCode" name="postalCode" type="text" placeholder="Code Postal" class="form-control input-md">
+                      </div>
+                      <label class="col-md-1 control-label" for="town">Ville</label>  
+                      <div class="col-md-2">
+                        <input id="town" name="town" type="text" placeholder="Ville" class="form-control input-md">
+                      </div>
+                      
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                      <label class="col-md-2 control-label" for="address">Adresse</label>  
+                      <div class="col-md-4">
+                      <input id="address" name="address" type="text" placeholder="Adresse" class="form-control input-md">
+                        
+                      </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                      <label class="col-md-2 control-label" for="phone">Numéro de téléphone</label>  
+                      <div class="col-md-4">
+                      <input id="phone" name="phone" type="text" placeholder="Numéro" class="form-control input-md">
+                        
+                      </div>
+                    </div>
+
+                    </fieldset>
+                    </form>
+
+                  </div>
+                </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                </div>
             </div>
                      <!--    Hover Rows  -->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Tous les utilisateurs
-                        </div>
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Username</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Tous les utilisateurs
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Username</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td> 
+                                    <td><img src="images/update.png" width=20>   <img src="images/delete.png" width=20></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                    <td><img src="images/update.png" width=20>   <img src="images/delete.png" width=20></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Larry</td>
+                                    <td>the Bird</td>
+                                    <td>@twitter</td>
+                                    <td><img src="images/update.png" width=20>   <img src="images/delete.png" width=20></td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Larry</td>
+                                    <td>the Bird</td>
+                                    <td>@twitter</td>
+                                    <td><img src="images/update.png" width=20>   <img src="images/delete.png" width=20></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     </div>

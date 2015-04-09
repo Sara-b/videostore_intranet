@@ -70,9 +70,9 @@
                         <ul id="menu-top" class="nav navbar-nav navbar-right">
                             <li><a href="index.html">Accueil</a></li>
                             <li><a href="users.html">Utilisateurs</a></li>
-                            <li><a class="menu-top-active" href="movies.html">Vidéos</a></li>
+                            <li><a href="movies.html">Vidéos</a></li>
                             <li><a href="reservations.html">Réservations</a></li>
-                            <li><a href="rentals.html">Locations</a></li>
+                            <li><a class="menu-top-active" href="rentals.html">Locations</a></li>
 
                         </ul>
                     </div>
@@ -86,7 +86,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h4 class="page-head-line">Vidéos</h4>
+                    <h4 class="page-head-line">Locations</h4>
                 </div>
             </div>
             <div class="row">
@@ -95,7 +95,7 @@
             </div>
 
                 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                  Ajouter une vidéo
+                  Créer une location
                 </button>
                 <div class="collapse" id="collapseExample">
                   <div class="well">
@@ -104,54 +104,37 @@
 
                         <!-- Text input-->
                         <div class="form-group">
-                          <label class="col-md-4 control-label" for="title">Titre</label>  
+                          <label class="col-md-4 control-label" for="title">Utilisateur</label>  
                           <div class="col-md-4">
-                          <input id="title" name="title" type="text" placeholder="Titre" class="form-control input-md">
-                            
+                            <input id="title" name="title" type="text" placeholder="Titre" class="form-control input-md">
                           </div>
                         </div>
 
-                        <!-- Select Basic -->
+                        <!-- Text input-->
                         <div class="form-group">
-                          <label class="col-md-4 control-label" for="director">Realisateur</label>
+                          <label class="col-md-4 control-label" for="movie">Film</label>  
                           <div class="col-md-4">
-                            <select id="director" name="director" class="form-control">
-                              <option value="1">Option one</option>
-                              <option value="2">Option two</option>
-                            </select>
+                            <input id="movie" name="movie" type="text" placeholder="Film" class="form-control input-md">
                           </div>
                         </div>
 
-                        <!-- Textarea -->
+                        <!-- Text input-->
                         <div class="form-group">
-                          <label class="col-md-4 control-label" for="description">Résumé</label>
-                          <div class="col-md-4">                     
-                            <textarea class="form-control" id="description" name="description"></textarea>
+                          <label class="col-md-4 control-label" for="date">Date d'emprunt</label>  
+                          <div class="col-md-2">
+                            <input id="leaving_date" name="leaving_date" type="text" placeholder="JJ/MM/YY" class="form-control input-md">
                           </div>
                         </div>
 
-                        <!-- Select Basic -->
                         <div class="form-group">
-                          <label class="col-md-4 control-label" for="category">Categorie</label>
-                          <div class="col-md-4">
-                            <select id="category" name="category" class="form-control">
-                              <option value="1">Option one</option>
-                              <option value="2">Option two</option>
-                            </select>
-                          </div>
-                        </div>
-
-                        <!-- File Button --> 
-                        <div class="form-group">
-                          <label class="col-md-4 control-label" for="picture">Image</label>
-                          <div class="col-md-4">
-                            <input id="picture" name="picture" class="input-file" type="file">
+                          <label class="col-md-4 control-label" for="date">Date de retour</label>  
+                          <div class="col-md-2">
+                            <input id="return_date" name="return_date" type="text" placeholder="JJ/MM/YY" class="form-control input-md">
                           </div>
                         </div>
 
                         </fieldset>
                     </form>
-
                   </div>
                 </div>
 
@@ -163,7 +146,7 @@
              <!--    Hover Rows  -->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Toutes les vidéos
+                    Toutes les locations
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive">
@@ -171,34 +154,44 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Titre</th>
-                                    <th>Réalisateur</th>
+                                    <th>Utilisateur</th>
+                                    <th>Film</th>
+                                    <th>Date d'emprunt</th>
+                                    <th>Date de retour</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>1</td>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
+                                    <td>Mark Dupint</td>
+                                    <td>HP</td>
+                                    <td>10/04/15</td>
+                                    <td>15/04/15</td>
                                     <td><img src="images/update.png" width=20>   <img src="images/delete.png" width=20></td>
                                 </tr>
                                 <tr>
-                                    <td>2</td>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
+                                    <td>1</td>
+                                    <td>Mark Dupint</td>
+                                    <td>HP</td>
+                                    <td>10/04/15</td>
+                                    <td>15/04/15</td>
                                     <td><img src="images/update.png" width=20>   <img src="images/delete.png" width=20></td>
                                 </tr>
                                 <tr>
-                                    <td>3</td>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
+                                    <td>1</td>
+                                    <td>Mark Dupint</td>
+                                    <td>HP</td>
+                                    <td>10/04/15</td>
+                                    <td>15/04/15</td>
                                     <td><img src="images/update.png" width=20>   <img src="images/delete.png" width=20></td>
                                 </tr>
                                 <tr>
-                                    <td>4</td>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
+                                    <td>1</td>
+                                    <td>Mark Dupint</td>
+                                    <td>HP</td>
+                                    <td>10/04/15</td>
+                                    <td>15/04/15</td>
                                     <td><img src="images/update.png" width=20>   <img src="images/delete.png" width=20></td>
                                 </tr>
                             </tbody>
