@@ -42,43 +42,37 @@ function connexion() {
     return false;
 }
 
-function getMovies() {
-    var data;
-    var xhr = getXMLHttpRequest();
-    
-    xhr.onreadystatechange = function() {
-    
-        if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
-            data = JSON.parse(xhr.responseText);
-            for(i=0;i<data.length;i++){
-                var nouvelleLigne = document.getElementById("monBody").insertRow(-1);
-                function ajouterLigne()
-                {
-                    var tableau = document.getElementById("list_movies");
+    function getMovies() {
+        var data;
+        var xhr = getXMLHttpRequest();
+        
+        xhr.onreadystatechange = function() {
+        
+            if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
+                data = JSON.parse(xhr.responseText);
+                console.log(data);
+                for(i=0;i<data.length;i++){
+                        var tableau = document.getElementById("list_movies");
 
-                    var ligne = tableau.insertRow(-1);//on a ajouté une ligne
+                        var ligne = tableau.insertRow(-1);//on a ajouté une ligne
 
-                    var colonne1 = ligne.insertCell(0);//on a une ajouté une cellule
-                    colonne1.innerHTML += data[i].id;//on y met le contenu de id
+                        var colonne1 = ligne.insertCell(0);//on a une ajouté une cellule
+                        colonne1.innerHTML += data[i].id;//on y met le contenu de id
 
-                    var colonne2 = ligne.insertCell(1);//on ajoute la seconde cellule
-                    colonne2.innerHTML += data[i].title;
+                        var colonne2 = ligne.insertCell(1);//on ajoute la seconde cellule
+                        colonne2.innerHTML += data[i].title;
 
-                    var date = new Date();
-                    var colonne3 = ligne.insertCell(2);
-                    colonne3.innerHTML += data[i].description;;//on ajoute le jour du mois
+                        var date = new Date();
+                        var colonne3 = ligne.insertCell(2);
+                        colonne3.innerHTML += data[i].id_director;//on ajoute le jour du mois
 
-                    var colonne4 = ligne.insertCell(3);
-                    colonne4.innerHTML += date.getFullYear();//les mois commencent par 0
-                }
+                        var colonne4 = ligne.insertCell(3);
+                        colonne4.innerHTML += data[i].description;//les mois commencent par 0
+                    }
             }
-            if(data)
-                alert(data);
-            //document.getElementById("myDiv").innerHTML= xhr.responseText;
-        }
-    };
-    xhr.open("GET","http://api.videostore.fr/videos",true);
-    xhr.send();
+        };
+        xhr.open("GET","http://api.videostore.fr/videos",true);
+        xhr.send();
 
-    return false;
-}
+        return false;
+    }
