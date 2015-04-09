@@ -21,7 +21,49 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <!-- CORE JQUERY SCRIPTS -->
+    <script src="assets/js/jquery-1.11.1.js"></script>
+    <script src="js_methods.js"></script>
 </head>
+    <script>
+    function getMovies() {
+        var data;
+        var xhr = getXMLHttpRequest();
+        
+        xhr.onreadystatechange = function() {
+        
+            if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
+                data = JSON.parse(xhr.responseText);
+                console.log(data);
+                for(i=0;i<data.length;i++){
+                        var tableau = document.getElementById("list_movies");
+
+                        var ligne = tableau.insertRow(-1);//on a ajouté une ligne
+
+                        var colonne1 = ligne.insertCell(0);//on a une ajouté une cellule
+                        colonne1.innerHTML += data[i].id;//on y met le contenu de id
+
+                        var colonne2 = ligne.insertCell(1);//on ajoute la seconde cellule
+                        colonne2.innerHTML += data[i].title;
+
+                        var colonne3 = ligne.insertCell(2);
+                        colonne3.innerHTML += data[i].first_name +" "+data[i].last_name ;//on ajoute le realisateur
+
+                        var colonne4 = ligne.insertCell(3);
+                        colonne4.innerHTML += data[i].description;//description
+                        //boutons actions
+                        var colonne5 = ligne.insertCell(4);
+                        colonne5.innerHTML += "<img src='images/update.png' width=20> <img src='images/delete.png' width=20>";
+                    }
+            }
+        };
+        xhr.open("GET","http://api.videostore.fr/videos",true);
+        xhr.send();
+
+        return false;
+    }
+        $(document).ready(getMovies());
+    </script>
 <body>
     <header>
         <div class="container">
@@ -159,54 +201,31 @@
                 <div class="col-md-12">
                 </div>
             </div>
-
-             <!--    Hover Rows  -->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Toutes les vidéos
-                </div>
-                <div class="panel-body">
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Titre</th>
-                                    <th>Réalisateur</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td><img src="images/update.png" width=20>   <img src="images/delete.png" width=20></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td><img src="images/update.png" width=20>   <img src="images/delete.png" width=20></td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                    <td><img src="images/update.png" width=20>   <img src="images/delete.png" width=20></td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                    <td><img src="images/update.png" width=20>   <img src="images/delete.png" width=20></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                     <!--    Hover Rows  -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Toutes les vidéos
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Titre</th>
+                                        <th>Réalisateur</th>
+                                        <th>Disponibilité</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="list_movies">
+                                </tbody>
+                            </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         </div>
     </div>
     <!-- CONTENT-WRAPPER SECTION END-->
@@ -222,8 +241,6 @@
     </footer>
     <!-- FOOTER SECTION END-->
     <!-- JAVASCRIPT AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
-    <!-- CORE JQUERY SCRIPTS -->
-    <script src="assets/js/jquery-1.11.1.js"></script>
     <!-- BOOTSTRAP SCRIPTS  -->
     <script src="assets/js/bootstrap.js"></script>
 </body>
