@@ -85,7 +85,6 @@
 
   //Connexion
    $app->post('/users/connexion', function () use ($app) {  
-    var_dump($_POST);
     $user = Customer::connexion($_POST['mail'],$_POST['password']); 
     $app->response("connexion reussie")->header('Content-Type', 'application/json');
     echo json_encode($user);

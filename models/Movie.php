@@ -5,7 +5,7 @@ class Movie
   public static function get_all_movies(){
     global $bdd;
     
-    $requete = $bdd->prepare("SELECT * FROM movies");
+    $requete = $bdd->prepare("SELECT * FROM movies JOIN directors ON id_director=directors.id");
       // l'execution 
     $requete->execute();
     $movies = $requete->fetchAll(PDO::FETCH_OBJ);

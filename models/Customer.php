@@ -55,18 +55,12 @@ class Customer
     if(isset($mail) AND $mail!="" AND isset($password) AND $password!="") // On a le pseudo et mdp
       {
         // On récupère tout le contenu de la table 
-        $req = $bdd->prepare('SELECT * FROM customers WHERE mail=:mail AND password=:password'); 
+        $req = $bdd->prepare('SELECT * FROM customers WHERE mail=:mail AND password=:password LIMIT 1'); 
         //on passe en paramètre de la requete nos variables $_POST
         $req->execute(array(
           'mail' => $mail,
           'password' => $password
           ));
-        /*if($donnees=$req->fetchAll(PDO::FETCH_OBJ)){  
-          $_SESSION['id']=$donnees['id'];
-          $_SESSION['mail']=$donnees['mail'];
-          $_SESSION['first_name']=$donnees['first_name'];
-          $_SESSION['last_name']=$donnees['last_name'];
-        */
         if($user=$req->fetch(PDO::FETCH_OBJ)){
           return $user;
         }
