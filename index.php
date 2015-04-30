@@ -1,140 +1,135 @@
-<?php  header("Access-Control-Allow-Origin: *");
-  session_start();
-  //require composer autoload (load all my libraries)
-  require 'vendor/autoload.php';
-  require 'connection_bdd.php';
-  //require my models
-  require 'models/Movie.php';
-  require 'models/Customer.php';
-  require 'models/Store.php';
-  require 'models/Rental.php';
-  require 'models/Administrator.php';
-  require 'models/category.php';
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <![endif]-->
+    <title>VIDÉOSTORE - Espace Employé</title>
+    <!-- BOOTSTRAP CORE STYLE  -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- FONT AWESOME ICONS  -->
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <!-- CUSTOM STYLE  -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+     <!-- HTML5 Shiv and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- <strong>Email: </strong>employee@myvideostore.com -->
+                    &nbsp;&nbsp;
+                    <!-- <strong>Support: </strong>+90-897-678-44 -->
+                </div>
 
-  // Slim initialisation
-  $app = new \Slim\Slim();
+            </div>
+        </div>
+    </header>
+    <!-- HEADER END-->
+    <div class="navbar navbar-inverse set-radius-zero">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">
 
-  // hook before.router, now $app is accessible in my views
-  $app->hook('slim.before.router', function () use ($app) {
-    $app->view()->setData('app', $app);
-  });
+                    <img src="assets/img/logo.png" />
+                </a>
 
+            </div>
 
-  //ROUTES
+            <div class="left-div">
+                <div class="user-settings-wrapper">
+                    <ul class="nav">
 
-  // root
-  $app->get('/', function(){
-  	echo "Vous etes à la racine";
-   	})->name('root'); // named route so I can use with "urlFor" method
-  
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                                <span class="glyphicon glyphicon-user" style="font-size: 25px;"></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-settings">
+                                <div class="media">
+                                    <a class="media-left" href="#">
+                                        <img src="assets/img/64-64.jpg" alt="" class="img-rounded" />
+                                    </a>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">Jhon Deo Alex </h4>
+                                        <h5>Developer & Designer</h5>
 
-  //VIDEOS
-  //GET all videos 
-  $app->get('/videos', function () use ($app) {  
-    $movies = Movie::get_all_movies('movies'); 
-    $app->response()->header('Content-Type', 'application/json');
-    echo json_encode($movies);
-  });
+                                    </div>
+                                </div>
+                                <hr />
+                                <h5><strong>Personal Bio : </strong></h5>
+                                Anim pariatur cliche reprehen derit.
+                                <hr />
+                                <a href="#" class="btn btn-info btn-sm">Full Profile</a>&nbsp; <a href="login.html" class="btn btn-danger btn-sm">Logout</a>
 
-  //GET video by id
-  $app->get('/videos/:id', function($id) use($app) {
-    $movie = Movie::get_movie_by_id($id); 
-    $app->response()->header('Content-Type', 'application/json');
-    echo json_encode($movie);
-	});
-
-  //GET video by title
-  $app->get('/videos/title/:title', function($title) use($app){
-    $movie = Movie::get_movie_by_title($title);
-    $app->response()->header('Content-Type', 'application/json');
-    echo json_encode($movie);
-  });
-
-  //GET videos by category
-  $app->get('/videos/category/:category', function($category) use($app){
-    $movie = Movie::get_movie_by_category($category);
-    $app->response()->header('Content-Type', 'application/json');
-    echo json_encode($movie);
-  });  
-
-
-
-  //CATEGORIES
-  //GET all categories 
-  $app->get('/categories', function () use ($app) {  
-    $categories = Category::get_all_categories(); 
-    $app->response()->header('Content-Type', 'application/json');
-    echo json_encode($categories);
-  });
-
-
-  //CUSTOMERS
-  //GET all customers 
-  $app->get('/users', function () use ($app) {  
-    $users = Customer::get_all_users(); 
-    $app->response()->header('Content-Type', 'application/json');
-    echo json_encode($users);
-  });
-
-  //Get User by id
-   $app->get('/users/:id', function ($id) use ($app) {  
-    $user = Customer::get_user_by_id($id); 
-    $app->response()->header('Content-Type', 'application/json');
-    echo json_encode($user);
-  });
-
-  //Connexion
-   $app->post('/users/connexion', function () use ($app) {  
-    $user = Customer::connexion($_POST['mail'],$_POST['password']); 
-    $app->response("connexion reussie")->header('Content-Type', 'application/json');
-    echo json_encode($user);
-  });
-     //Connexion
-   $app->get('/users/connexion/:mail', function ($mail) use ($app) {  
-    $user = Customer::connexion2($mail); 
-    $app->response("connexion reussie")->header('Content-Type', 'application/json');
-    echo json_encode($user);
-  });
-
-   //STORES
-  //GET all stores 
-  $app->get('/magasins', function () use ($app) {  
-    $stores = Store::get_all_store(); 
-    $app->response()->header('Content-Type', 'application/json');
-    echo json_encode($stores);
-  });
-
-  //Get store by id
-   $app->get('/magasins/:id', function ($id) use ($app) {  
-    $store = Store::get_store_by_id($id); 
-    $app->response()->header('Content-Type', 'application/json');
-    echo json_encode($store);
-  });
+                            </div>
+                        </li>
 
 
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- LOGO HEADER END-->
+    <section class="menu-section">
+        <div class="container">
 
-   //ADMINISTRATOR
-  //GET all admins 
-  $app->get('/employes', function () use ($app) {  
-    $administrators = Administrator::get_all_administrators(); 
-    $app->response()->header('Content-Type', 'application/json');
-    echo json_encode($administrators);
-  });
+        </div>
+    </section>
+    <!-- MENU SECTION END-->
+    <div class="content-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 class="page-head-line">Connexion</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <label>Identifiant : </label>
+                        <input type="text" class="form-control" id="mail" name="mail"/>
+                        <label>Mot de Passe :  </label>
+                        <input type="password" class="form-control" id="mdp" name="mdp"/>
+                        <hr />
+                        <a onclick="connexion()" class="btn btn-info"><span class="glyphicon glyphicon-user"></span> &nbsp;Connexion </a>&nbsp;
+                       
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- CONTENT-WRAPPER SECTION END-->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    &copy; 2015 Videostore | By : <a href="http://www.designbootstrap.com/" target="_blank">Equipe Dev'</a>
+                </div>
 
-  //Get admin by id
-   $app->get('/employes/:id', function ($id) use ($app) {  
-    $administrator = Administrator::get_administrator_by_id($id); 
-    $app->response()->header('Content-Type', 'application/json');
-    echo json_encode($administrator);
-  });
-
-   //Get admins by user
-   $app->get('/employes/store/:id', function ($store_id) use ($app) {  
-    $administrators = Administrator::get_administrators_by_store($store_id); 
-    $app->response()->header('Content-Type', 'application/json');
-    echo json_encode($administrators);
-  });
-
-
-  $app->run();
-?>
+            </div>
+        </div>
+    </footer>
+    <!-- FOOTER SECTION END-->
+    <!-- JAVASCRIPT AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
+    <!-- CORE JQUERY SCRIPTS -->
+    <script src="assets/js/jquery-1.11.1.js"></script>
+    <!-- BOOTSTRAP SCRIPTS  -->
+    <script src="assets/js/bootstrap.js"></script>
+    <script src="js_methods.js">
+    </script>
+</body>
+</html>
