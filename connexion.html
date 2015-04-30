@@ -22,6 +22,7 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
+    <script src="js_methods.js"></script>
 <body>
     <header>
         <div class="container">
@@ -106,8 +107,8 @@
                         <label>Mot de Passe :  </label>
                         <input type="password" class="form-control" id="mdp" name="mdp"/>
                         <hr />
-                        <a onclick="connexion()" class="btn btn-info"><span class="glyphicon glyphicon-user"></span> &nbsp;Connexion </a>&nbsp;
-                       
+                        <a onclick="connexionAdmin()" class="btn btn-info"><span class="glyphicon glyphicon-user"></span> &nbsp;Connexion </a>&nbsp;
+                        <div class="err" id="add_err"></div>
                 </div>
             </div>
         </div>
@@ -129,9 +130,8 @@
     <script src="assets/js/jquery-1.11.1.js"></script>
     <!-- BOOTSTRAP SCRIPTS  -->
     <script src="assets/js/bootstrap.js"></script>
-    <script src="js_methods.js">
-        
-
-    </script>
+    <script>
+    $(document).ready(function(){$("#add_err").css('display', 'none', 'important');
+});</script>
 </body>
 </html>
