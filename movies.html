@@ -99,9 +99,7 @@
                 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                   Ajouter une vidéo
                 </button>
-                <div class="collapse" id="collapseExample">
-                  <div class="well">
-                    <form class="form-horizontal">
+                <div class="collapse well form-horizontal" id="collapseExample">
                         <fieldset>
 
                         <!-- Text input-->
@@ -115,11 +113,11 @@
 
                         <!-- Select Basic -->
                         <div class="form-group">
-                          <label class="col-md-4 control-label" for="director">Realisateur</label>
+                          <label class="col-md-4 control-label" for="director">Réalisateur</label>
                           <div class="col-md-4">
                             <select id="director" name="director" class="form-control">
-                              <option value="1">Option one</option>
-                              <option value="2">Option two</option>
+                              <option value="2">Quentin Tarantino</option>
+                              <option value="4">Christopher Nolan</option>
                             </select>
                           </div>
                         </div>
@@ -134,11 +132,11 @@
 
                         <!-- Select Basic -->
                         <div class="form-group">
-                          <label class="col-md-4 control-label" for="category">Categorie</label>
+                          <label class="col-md-4 control-label" for="category">Catégorie</label>
                           <div class="col-md-4">
                             <select id="category" name="category" class="form-control">
-                              <option value="1">Option one</option>
-                              <option value="2">Option two</option>
+                              <option value="2">Action</option>
+                              <option value="5">Science Fiction</option>
                             </select>
                           </div>
                         </div>
@@ -151,10 +149,15 @@
                           </div>
                         </div>
 
-                        </fieldset>
-                    </form>
+                        <!-- Button -->
+                        <div class="form-group">
+                          <label class="col-md-4 control-label" for="btn"></label>
+                          <div class="col-md-4">
+                            <button id="submit" name="submit" class="btn btn-primary" onClick="create_movie()">Valider</button>
+                          </div>
+                        </div>
 
-                  </div>
+                        </fieldset>
                 </div>
 
             <div class="row">
