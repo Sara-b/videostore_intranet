@@ -63,7 +63,6 @@ function connexionAdmin() {
             });
     }
 
-
 function getMovies() {
     var data;
     var xhr = getXMLHttpRequest();
@@ -108,6 +107,43 @@ function insertMovie(row){
     var colonne5 = ligne.insertCell(4);
     colonne5.innerHTML += "<img src='images/update.png' width=20/><a onclick='delete_movie("+row.id+");'><img src='images/delete.png' width=20/></a>";
 }
+
+function getUsers() {
+        var data;
+        var xhr = getXMLHttpRequest();
+        
+        xhr.onreadystatechange = function() {
+        
+            if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
+                data = JSON.parse(xhr.responseText);
+                //console.log(data);
+                for(i=0;i<data.length;i++){
+                        var tableau = document.getElementById("list_users");
+
+                        var ligne = tableau.insertRow(-1);//on a ajouté une ligne
+
+                        var colonne1 = ligne.insertCell(0);//on a une ajouté une cellule
+                        colonne1.innerHTML += data[i].first_name;//on y met le contenu de id
+
+                        var colonne2 = ligne.insertCell(1);//on ajoute la seconde cellule
+                        colonne2.innerHTML += data[i].last_name;
+
+                        var colonne3 = ligne.insertCell(2);
+                        colonne3.innerHTML += data[i].mail ;//on ajoute le realisateur
+                        
+                        var colonne4 = ligne.insertCell(3);
+                        colonne4.innerHTML += data[i].phone;//description
+                        //boutons actions
+                        var colonne5 = ligne.insertCell(4);
+                        colonne5.innerHTML += "<img src='images/update.png' width=20> <img src='images/delete.png' width=20>";
+                    }
+            }
+        };
+        xhr.open("GET","http://api.videostore.fr/users",true);
+        xhr.send();
+
+        return false;
+    }
 
 function getUsers() {
         var data;
