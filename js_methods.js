@@ -62,12 +62,14 @@ function connexion() {
                         var colonne2 = ligne.insertCell(1);//on ajoute la seconde cellule
                         colonne2.innerHTML += data[i].title;
 
-                        var date = new Date();
                         var colonne3 = ligne.insertCell(2);
-                        colonne3.innerHTML += data[i].id_director;//on ajoute le jour du mois
+                        colonne3.innerHTML += data[i].id_director;//on ajoute l'id du realisateur
 
                         var colonne4 = ligne.insertCell(3);
-                        colonne4.innerHTML += data[i].description;//les mois commencent par 0
+                        colonne4.innerHTML += data[i].description;//description
+                        //boutons actions
+                        var colonne5 = ligne.insertCell(4);
+                        colonne4.innerHTML += "<img src='images/update.png' width=20>   <img src='images/delete.png' width=20>";
                     }
             }
         };
