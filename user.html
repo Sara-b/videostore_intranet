@@ -93,11 +93,11 @@
                 <div class="col-md-2">
                     <img src="images/add.png" class="img-rounded">
                 </div>
-                <h2>Elodie Bironneau</h2>
-                <h5>Adresse: 120 rue Seguineau </h5>
-                <h5>33700 Merignac France</h5>
-                <h5>telepone:</h5>
-                <h5>mail: </h5>
+                <h2 id="name">Elodie Bironneau</h2>
+                <h5 id="address">Adresse: 120 rue Seguineau </h5>
+                <h5 id="town">33700 Merignac France</h5>
+                <h5 id="tel"></h5>
+                <h5 id="mail"></h5>
                 <div class="col-md-2"></div>
             </div>
 
@@ -171,7 +171,8 @@
     <script src="assets/js/bootstrap.js"></script>
     <script src="js_methods.js"></script>
     <script>
-        //$(document).ready(getMovies());
+        //$(document).ready(getOneUser());
+        $(document).ready(getRentalsByUser());
     </script>
 </body>
 </html>

@@ -318,11 +318,11 @@ function getUsers() {
                         colonne5.innerHTML += "<img src='images/update.png' width=20/><a onclick='delete_movie("+data[i].id+");'><img src='images/delete.png' width=20/></a>";*/
                 }
             }
-    };
-    xhr.open("GET","http://api.videostore.fr/exemplaires",true);
-    xhr.send();
+        };
+        xhr.open("GET","http://api.videostore.fr/exemplaires",true);
+        xhr.send();
 
-    return false;
+        return false;
     }
 
     function insertCopies(row){
@@ -339,7 +339,7 @@ function getUsers() {
     colonne2.innerHTML += row.title;
 
     var colonne3 = ligne.insertCell(2);
-    colonne3.innerHTML += row.director ;//on ajoute le realisateur
+    colonne3.innerHTML += row.director;//on ajoute le realisateur
     
     var colonne4 = ligne.insertCell(3);
     colonne4.innerHTML += row.format;//format
@@ -386,3 +386,159 @@ function create_copies(){
             xhr.send(params);
         }
     } 
+
+    function getOneMovie(){
+        var data;
+        var xhr = getXMLHttpRequest();
+        
+        xhr.onreadystatechange = function() {
+        
+            if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
+                data = JSON.parse(xhr.responseText);
+                //console.log(data);
+                for(i=0;i<data.length;i++){
+
+                    insertCopies(data[i]);
+                        /*var tableau = document.getElementById("list_movies");
+
+                        var ligne = tableau.insertRow(-1);//on a ajouté une ligne
+
+                        var colonne1 = ligne.insertCell(0);//on a une ajouté une cellule
+                        colonne1.innerHTML += data[i].id;//on y met le contenu de id
+
+                        var colonne2 = ligne.insertCell(1);//on ajoute la seconde cellule
+                        colonne2.innerHTML += data[i].title;
+
+                        var colonne3 = ligne.insertCell(2);
+
+                        colonne3.innerHTML += data[i].director ;//on ajoute le realisateur
+                        
+                        var colonne4 = ligne.insertCell(3);
+                        colonne4.innerHTML += data[i].description;//description
+                        //boutons actions
+                        var colonne5 = ligne.insertCell(4);
+                        colonne5.innerHTML += "<img src='images/update.png' width=20/><a onclick='delete_movie("+data[i].id+");'><img src='images/delete.png' width=20/></a>";*/
+                }
+            }
+        }
+        xhr.open("GET","http://api.videostore.fr/exemplaires",true);
+        xhr.send();
+
+        return false;
+    }
+
+function getRentals() {
+    var data;
+    var xhr = getXMLHttpRequest();
+    
+    xhr.onreadystatechange = function() {
+    
+        if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
+            data = JSON.parse(xhr.responseText);
+            //console.log(data);
+            for(i=0;i<data.length;i++){
+
+                insertRentals(data[i]);
+            }
+        }
+    };
+    xhr.open("GET","http://api.videostore.fr/locations",true);
+    xhr.send();
+
+    return false;
+}
+
+function insertRentals(row){
+    var tableau = document.getElementById("list_rentals");
+
+    var ligne = tableau.insertRow(-1);//on a ajouté une ligne
+
+    var colonne1 = ligne.insertCell(0);//on a une ajouté une cellule
+    colonne1.innerHTML += row.id;//on y met le contenu de id
+
+    var colonne2 = ligne.insertCell(1);//on ajoute la seconde cellule
+    colonne2.innerHTML += row.utilisateur;
+
+    var colonne3 = ligne.insertCell(2);
+    colonne3.innerHTML += row.film;//on ajoute le realisateur
+    
+    var colonne4 = ligne.insertCell(3);
+    colonne4.innerHTML += row.date_emprunt;//description
+
+    var colonne5 = ligne.insertCell(4);
+    colonne5.innerHTML += row.date_retour;//description
+    //boutons actions
+    var colonne6 = ligne.insertCell(5);
+    colonne6.innerHTML += "<img src='images/update.png' width=20/><a onclick='delete_movie("+row.id+");'><img src='images/delete.png' width=20/></a>";
+}
+
+function getOneUser() {
+    var data;
+    var xhr = getXMLHttpRequest();
+    
+    xhr.onreadystatechange = function() {
+    
+        if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
+            data = JSON.parse(xhr.responseText);
+
+            var nom = document.getElementById("name");
+            nom.innerHTML = data.name;
+
+            var adresse = document.getElementById("address");
+            adresse.innerHTML = data.address;
+
+            var ville = document.getElementById("town");
+            ville.innerHTML = data.town;
+
+            var tel = document.getElementById("tel");
+            tel.innerHTML = "Telephone: "+data.phone;
+
+            var mail = document.getElementById("mail");
+            mail.innerHTML ="mail: "+data.mail;
+
+            var adresse = document.getElementById("address");
+            adresse.innerHTML = data.address;
+
+            getRentalsByUser();
+        }
+    };
+    xhr.open("GET","http://api.videostore.fr/users/3",true);
+    xhr.send();
+
+    return false;
+}
+
+function getRentalsByUser() {
+    var data;
+    var xhr = getXMLHttpRequest();
+    
+    xhr.onreadystatechange = function() {
+    
+        if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
+            data = JSON.parse(xhr.responseText);
+            console.log(data);
+            for(i=0;i<data.length;i++){
+                insertRentalsByUser(data[i]);
+            }
+        }
+    };
+    xhr.open("GET","http://api.videostore.fr/users/3/rentals",true);
+    xhr.send();
+
+    return false;
+}
+
+function insertRentalsByUser(row){
+    var tableau = document.getElementById("list_rentals");
+
+    var ligne = tableau.insertRow(-1);//on a ajouté une ligne
+
+    var colonne1 = ligne.insertCell(0);//on a une ajouté une cellule
+    colonne1.innerHTML += row.title;//on y met le contenu de id
+
+    var colonne2 = ligne.insertCell(1);//on ajoute la seconde cellule
+    colonne2.innerHTML += row.loaning_date;
+
+    var colonne3 = ligne.insertCell(2);
+    colonne3.innerHTML += row.return_date;
+}

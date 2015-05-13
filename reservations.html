@@ -103,11 +103,14 @@
                     <form class="form-horizontal">
                         <fieldset>
 
-                        <!-- Text input-->
                         <div class="form-group">
                           <label class="col-md-4 control-label" for="title">Utilisateur</label>  
                           <div class="col-md-4">
-                            <input id="title" name="title" type="text" placeholder="Titre" class="form-control input-md">
+                            <select id="user" name="user" class="form-control">
+                              <option value="1">Sara</option>
+                              <option value="2">Elodie</option>
+                              <option value="3">Elisa</option>
+                            </select>
                           </div>
                         </div>
 
@@ -115,7 +118,10 @@
                         <div class="form-group">
                           <label class="col-md-4 control-label" for="movie">Film</label>  
                           <div class="col-md-4">
-                            <input id="movie" name="movie" type="text" placeholder="Film" class="form-control input-md">
+                            <select id="movie" name="movie" class="form-control">
+                              <option value="1">Inception</option>
+                              <option value="2">Avengers</option>
+                            </select>
                           </div>
                         </div>
 
@@ -160,35 +166,7 @@
                                     <th></th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Mark Dupint</td>
-                                    <td>HP</td>
-                                    <td>10/04/15 18h30</td>
-                                    <td><img src="images/update.png" width=20>   <img src="images/delete.png" width=20></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Mark Dupint</td>
-                                    <td>HP</td>
-                                    <td>10/04/15 18h30</td>
-                                    <td><img src="images/update.png" width=20>   <img src="images/delete.png" width=20></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Mark Dupint</td>
-                                    <td>HP</td>
-                                    <td>10/04/15 18h30</td>
-                                    <td><img src="images/update.png" width=20>   <img src="images/delete.png" width=20></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Mark Dupint</td>
-                                    <td>HP</td>
-                                    <td>10/04/15 18h30</td>
-                                    <td><img src="images/update.png" width=20>   <img src="images/delete.png" width=20></td>
-                                </tr>
+                            <tbody id="list_reservations">
                             </tbody>
                         </table>
                     </div>
@@ -214,5 +192,9 @@
     <script src="assets/js/jquery-1.11.1.js"></script>
     <!-- BOOTSTRAP SCRIPTS  -->
     <script src="assets/js/bootstrap.js"></script>
+    <script src="js_methods.js"></script>
+    <script>
+        $(document).ready(getReservations());
+    </script>
 </body>
 </html>
