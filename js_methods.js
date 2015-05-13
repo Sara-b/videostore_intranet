@@ -451,7 +451,7 @@ function getRentals() {
 }
 
 function insertRentals(row){
-    var tableau = document.getElementById("list_rentals");
+    var tableau = document.getElementById("list_reservations");
 
     var ligne = tableau.insertRow(-1);//on a ajouté une ligne
 
@@ -471,7 +471,7 @@ function insertRentals(row){
     colonne5.innerHTML += row.date_retour;//description
     //boutons actions
     var colonne6 = ligne.insertCell(5);
-    colonne6.innerHTML += "<img src='images/update.png' width=20/><a onclick='delete_movie("+row.id+");'><img src='images/delete.png' width=20/></a>";
+    colonne6.innerHTML += "<img src='images/update.png' width=20/><a onclick=''><img src='images/delete.png' width=20/></a>";
 }
 
 function getOneUser() {
@@ -500,11 +500,9 @@ function getOneUser() {
 
             var adresse = document.getElementById("address");
             adresse.innerHTML = data.address;
-
-            getRentalsByUser();
         }
     };
-    xhr.open("GET","http://api.videostore.fr/users/3",true);
+    xhr.open("GET","http://api.videostore.fr/users/1",true);
     xhr.send();
 
     return false;
@@ -524,7 +522,7 @@ function getRentalsByUser() {
             }
         }
     };
-    xhr.open("GET","http://api.videostore.fr/users/3/rentals",true);
+    xhr.open("GET","http://api.videostore.fr/users/1/rentals",true);
     xhr.send();
 
     return false;
@@ -537,7 +535,7 @@ function insertRentalsByUser(row){
 
     var colonne1 = ligne.insertCell(0);//on a une ajouté une cellule
     colonne1.innerHTML += row.title;//on y met le contenu de id
-
+    
     var colonne2 = ligne.insertCell(1);//on ajoute la seconde cellule
     colonne2.innerHTML += row.loaning_date;
 
