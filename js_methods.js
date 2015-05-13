@@ -201,6 +201,23 @@ function getUsers() {
         }
 
     }
+        function delete_copy(id){
+        var answer = confirm("Voulez vous vraiment supprimer cet élément ?")
+        if (answer){
+            $.ajax({
+                type: "DELETE",
+                method: "POST",
+                url: "http://api.videostore.fr/copy/"+id
+            })
+            .done(function( msg ) {
+                alert( "Data deleted: " + msg );
+            })
+            .fail(function(data){
+                alert("Echec de la suppression");}
+            );
+        }
+
+    }
 
     function resetFields(){
         $('#title').val="";
@@ -350,7 +367,7 @@ function getUsers() {
     colonne5.innerHTML += row.status;//status
     //boutons actions
     var colonne6 = ligne.insertCell(5);
-    colonne6.innerHTML += "<img src='images/update.png' width=20/><a onclick='delete_movie("+row.id+");'><img src='images/delete.png' width=20/></a>";
+    colonne6.innerHTML += "<img src='images/update.png' width=20/><a onclick='delete_copy("+row.id+");'><img src='images/delete.png' width=20/></a>";
 }
 
 //Ne fonctionne pas
@@ -535,7 +552,7 @@ function insertRentalsByUser(row){
 
     var colonne1 = ligne.insertCell(0);//on a une ajouté une cellule
     colonne1.innerHTML += row.title;//on y met le contenu de id
-    
+
     var colonne2 = ligne.insertCell(1);//on ajoute la seconde cellule
     colonne2.innerHTML += row.loaning_date;
 
