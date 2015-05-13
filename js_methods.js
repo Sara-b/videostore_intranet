@@ -182,26 +182,20 @@ function getUsers() {
         return false;
     }
 
+
     function delete_movie(id){
-        /*var xhr = getXMLHttpRequest();
         var answer = confirm("Voulez vous vraiment supprimer cet élément ?")
-        if (answer){
-            xhr.open("DELETE","http://api.videostore.fr/video/"+id,false);
-            xhr.send();
-        }
-        else{return;}*/
-        var answer = confirm("Voulez vous vraiment supprimer cet élément ???")
         if (answer){
             $.ajax({
                 type: "DELETE",
                 method: "POST",
-                url: "http://api.videostore.fr/video/"+id
+                url: "http://api.videostore.fr/videos/"+id
             })
             .done(function( msg ) {
                 alert( "Data deleted: " + msg );
             })
             .fail(function(data){
-                alert("message de retour : " + data);}
+                alert("Echec de la suppression");}
             );
         }
 
@@ -225,11 +219,6 @@ function getUsers() {
         var category = encodeURIComponent($("#category").val());
         var picture = encodeURIComponent($("#picture").val());
 
-        console.log("titre : " + titre);
-        console.log("description : " + description);
-        console.log("director : " + director);
-        console.log("category : " + category);
-        console.log("picture : " + picture);
         
         xhr.onreadystatechange = function() {
             if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
@@ -282,4 +271,20 @@ function getUsers() {
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         //on envoie les parametres
         xhr.send(params);
-    }    
+    } 
+
+    function update_movie(){
+        $.ajax({
+                method: "PUT",
+                url: "http://api.videostore.fr/videos/"+id+"/update" 
+            })
+            .done(function( msg ) {
+                alert( "Data updated: " + msg );
+            })
+            .fail(function(data){
+                alert("Echec de la modification");}
+            );
+        
+    }
+
+
