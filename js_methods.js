@@ -136,6 +136,7 @@ function getUsers() {
                         //boutons actions
                         var colonne5 = ligne.insertCell(4);
                         colonne5.innerHTML += "<img src='images/update.png' width=20> <img src='images/delete.png' width=20>";
+
                     }
             }
         };
@@ -283,8 +284,107 @@ function getUsers() {
             })
             .fail(function(data){
                 alert("Echec de la modification");}
-            );
+            );  
+    }    
+
+    function getCopies() {
+        var data;
+        var xhr = getXMLHttpRequest();
         
+        xhr.onreadystatechange = function() {
+        
+            if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
+                data = JSON.parse(xhr.responseText);
+                //console.log(data);
+                for(i=0;i<data.length;i++){
+
+                    insertCopies(data[i]);
+                        /*var tableau = document.getElementById("list_movies");
+
+                        var ligne = tableau.insertRow(-1);//on a ajouté une ligne
+
+                        var colonne1 = ligne.insertCell(0);//on a une ajouté une cellule
+                        colonne1.innerHTML += data[i].id;//on y met le contenu de id
+
+                        var colonne2 = ligne.insertCell(1);//on ajoute la seconde cellule
+                        colonne2.innerHTML += data[i].title;
+
+                        var colonne3 = ligne.insertCell(2);
+
+                        colonne3.innerHTML += data[i].director ;//on ajoute le realisateur
+                        
+                        var colonne4 = ligne.insertCell(3);
+                        colonne4.innerHTML += data[i].description;//description
+                        //boutons actions
+                        var colonne5 = ligne.insertCell(4);
+                        colonne5.innerHTML += "<img src='images/update.png' width=20/><a onclick='delete_movie("+data[i].id+");'><img src='images/delete.png' width=20/></a>";*/
+                }
+            }
+    };
+    xhr.open("GET","http://api.videostore.fr/exemplaires",true);
+    xhr.send();
+
+    return false;
     }
 
+    function insertCopies(row){
 
+
+    var tableau = document.getElementById("list_copies");
+
+    var ligne = tableau.insertRow(-1);//on a ajouté une ligne
+
+    var colonne1 = ligne.insertCell(0);//on a une ajouté une cellule
+    colonne1.innerHTML += row.id;//on y met le contenu de id
+
+    var colonne2 = ligne.insertCell(1);//on ajoute la seconde cellule
+    colonne2.innerHTML += row.title;
+
+    var colonne3 = ligne.insertCell(2);
+    colonne3.innerHTML += row.director ;//on ajoute le realisateur
+    
+    var colonne4 = ligne.insertCell(3);
+    colonne4.innerHTML += row.format;//format
+
+    var colonne5 = ligne.insertCell(4);
+    colonne5.innerHTML += row.status;//status
+    //boutons actions
+    var colonne6 = ligne.insertCell(5);
+    colonne6.innerHTML += "<img src='images/update.png' width=20/><a onclick='delete_movie("+row.id+");'><img src='images/delete.png' width=20/></a>";
+}
+
+//Ne fonctionne pas
+function create_copies(){
+        //initialisation du httpRequest
+        var xhr = getXMLHttpRequest();
+        //on recupere la valeur des input dans la page html
+        var id_movie = encodeURIComponent($("#movie").val());
+        var id_store = 1;
+        var id_format = encodeURIComponent($("#format").val());
+        var nbCopies = encodeURIComponent($("#nbCopies").val());
+
+        console.log("id_movie : " + id_movie);
+        console.log("id_store : " + id_store);
+        console.log("id_format : " + id_format);
+        console.log("nbCopies : " + nbCopies);
+        
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
+                alert("L'exemplaires a bien été ajouté");
+                var data = JSON.parse(xhr.responseText);
+                console.log(data);
+                alert(data);
+                insertCopies(JSON.parse(data));
+            }
+        };
+
+        for(i=0;i<nbCopies.length;i++){
+            var params = "id_movie="+id_movie+"&id_format="+id_format+"&id_store="+id_store;
+            //on envoie un POST sur l'api à l'url voulue
+            xhr.open("POST","http://api.videostore.fr/exemplaires",true);
+            //on indique au Header qu'il s'agit d'un formulaire
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            //on envoie les parametres
+            xhr.send(params);
+        }
+    } 

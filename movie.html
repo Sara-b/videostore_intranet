@@ -72,7 +72,7 @@
                         <ul id="menu-top" class="nav navbar-nav navbar-right">
                             <li><a href="index.html">Accueil</a></li>
                             <li><a href="users.html">Utilisateurs</a></li>
-                            <li><a class="menu-top-active" href="movies.html">Vidéos</a></li>
+                            <li><a href="movies.html">Vidéos</a></li>
                             <li><a href="reservations.html">Réservations</a></li>
                             <li><a href="rentals.html">Locations</a></li>
                             <li><a href="copies.html">Ce Magasin</a></li>
@@ -87,107 +87,50 @@
     <!-- MENU SECTION END-->
         <div class="content-wrapper">
         <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h4 class="page-head-line">Vidéos</h4>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                </div>
-            </div>
-
-                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                  Ajouter une vidéo
-                </button>
-                <div class="collapse well form-horizontal" id="collapseExample">
-                        <fieldset>
-
-                        <!-- Text input-->
-                        <div class="form-group">
-                          <label class="col-md-4 control-label" for="title">Titre</label>  
-                          <div class="col-md-4">
-                          <input id="title" name="title" type="text" placeholder="Titre" class="form-control input-md">
-                            
-                          </div>
-                        </div>
-
-                        <!-- Select Basic -->
-                        <div class="form-group">
-                          <label class="col-md-4 control-label" for="director">Réalisateur</label>
-                          <div class="col-md-4">
-                            <select id="director" name="director" class="form-control">
-                              <option value="2">Quentin Tarantino</option>
-                              <option value="4">Christopher Nolan</option>
-                            </select>
-                          </div>
-                        </div>
-
-                        <!-- Textarea -->
-                        <div class="form-group">
-                          <label class="col-md-4 control-label" for="description">Résumé</label>
-                          <div class="col-md-4">                     
-                            <textarea class="form-control" id="description" name="description"></textarea>
-                          </div>
-                        </div>
-
-                        <!-- Select Basic -->
-                        <div class="form-group">
-                          <label class="col-md-4 control-label" for="category">Catégorie</label>
-                          <div class="col-md-4">
-                            <select id="category" name="category" class="form-control">
-                              <option value="2">Action</option>
-                              <option value="5">Science Fiction</option>
-                            </select>
-                          </div>
-                        </div>
-
-                        <!-- File Button --> 
-                        <div class="form-group">
-                          <label class="col-md-4 control-label" for="picture">Image</label>
-                          <div class="col-md-4">
-                            <input id="picture" name="picture" class="input-file" type="file">
-                          </div>
-                        </div>
-
-                        <!-- Button -->
-                        <div class="form-group">
-                          <label class="col-md-4 control-label" for="btn"></label>
-                          <div class="col-md-4">
-                            <button id="submit" name="submit" class="btn btn-primary" onClick="create_movie()">Valider</button>
-                          </div>
-                        </div>
-
-                        </fieldset>
-                </div>
 
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-2"></div>
+                <div class="col-md-2">
+                    <img src="images/add.png" class="img-rounded">
                 </div>
+                <h1>Titre</h1>
+                <h3>Realisateur</h3>
+                <div class="col-md-2"></div>
             </div>
-                     <!--    Hover Rows  -->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Toutes les vidéos
-                        </div>
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-hover">
+
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8" style="text-align:justify;">
+                    <p>Alors que Tony Stark tente de relancer un programme de maintien de la paix jusque-là suspendu, les choses tournent mal et les super-héros Iron Man, Captain America, Thor, Hulk, Black Widow et Hawkeye vont devoir à nouveau unir leurs forces pour combattre le plus puissant de leurs adversaires : le terrible Ultron, un être technologique terrifiant qui sest juré déradiquer lespèce humaine. Afin dempêcher celui-ci daccomplir ses sombres desseins, des alliances inattendues se scellent, les entraînant dans une incroyable aventure et une haletante course contre le temps </p>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-5">
+                    <h4>Dans les magasins:</h4>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
-                                        <th>Titre</th>
-                                        <th>Réalisateur</th>
-                                        <th>Description</th>
-                                        <th>Actions</th>
+                                        <th>Magasin</th>
+                                        <th>Disponible</th>
                                     </tr>
                                 </thead>
-                                <tbody id="list_movies">
+                                <tbody id="list_magasins">
                                 </tbody>
                             </table>
-                            </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        </div>
+            
+            
+                                
                 </div>
             </div>
         </div>
@@ -199,7 +142,6 @@
                 <div class="col-md-12">
                     &copy; 2015 YourCompany | By : <a href="http://www.designbootstrap.com/" target="_blank">DesignBootstrap</a>
                 </div>
-
             </div>
         </div>
     </footer>
@@ -209,7 +151,7 @@
     <script src="assets/js/bootstrap.js"></script>
     <script src="js_methods.js"></script>
     <script>
-        $(document).ready(getMovies());
+        //$(document).ready(getMovies());
     </script>
 </body>
 </html>
