@@ -91,7 +91,7 @@
             <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-md-2">
-                    <img src="images/add.png" class="img-rounded">
+                    <img id="image" class="img-rounded">
                 </div>
                 <h1 id="title"></h1>
                 <h3 id="director"></h3>
@@ -153,6 +153,7 @@
     <script src="js_methods.js"></script>
     <script>
         $(document).ready(getOneMovie());
+        $(document).ready(getCopiesByMovie());
     </script>
 </body>
 </html>

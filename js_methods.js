@@ -406,46 +406,6 @@ function create_copies(){
         }
     } 
 
-    function getOneMovie(){
-        var data;
-        var xhr = getXMLHttpRequest();
-        
-        xhr.onreadystatechange = function() {
-        
-            if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
-                data = JSON.parse(xhr.responseText);
-                //console.log(data);
-                for(i=0;i<data.length;i++){
-
-                    insertCopies(data[i]);
-                        /*var tableau = document.getElementById("list_movies");
-
-                        var ligne = tableau.insertRow(-1);//on a ajouté une ligne
-
-                        var colonne1 = ligne.insertCell(0);//on a une ajouté une cellule
-                        colonne1.innerHTML += data[i].id;//on y met le contenu de id
-
-                        var colonne2 = ligne.insertCell(1);//on ajoute la seconde cellule
-                        colonne2.innerHTML += data[i].title;
-
-                        var colonne3 = ligne.insertCell(2);
-
-                        colonne3.innerHTML += data[i].director ;//on ajoute le realisateur
-                        
-                        var colonne4 = ligne.insertCell(3);
-                        colonne4.innerHTML += data[i].description;//description
-                        //boutons actions
-                        var colonne5 = ligne.insertCell(4);
-                        colonne5.innerHTML += "<img src='images/update.png' width=20/><a onclick='delete_movie("+data[i].id+");'><img src='images/delete.png' width=20/></a>";*/
-                }
-            }
-        }
-        xhr.open("GET","http://api.videostore.fr/exemplaires",true);
-        xhr.send();
-
-        return false;
-    }
-
 function getRentals() {
     var data;
     var xhr = getXMLHttpRequest();
@@ -572,6 +532,9 @@ function getOneMovie() {
             var titre = document.getElementById("title");
             titre.innerHTML = data.title;
 
+            var img = document.getElementById("image");
+            img.setAttribute("src", data.picture);
+
             var realisateur = document.getElementById("director");
             realisateur.innerHTML = "Réalisateur: "+data.director;
 
@@ -579,7 +542,7 @@ function getOneMovie() {
             description.innerHTML = data.description;
         }
     };
-    xhr.open("GET","http://api.videostore.fr/videos/6",true);
+    xhr.open("GET","http://api.videostore.fr/videos/10",true);
     xhr.send();
 
     return false;
@@ -595,11 +558,11 @@ function getCopiesByMovie() {
             data = JSON.parse(xhr.responseText);
             console.log(data);
             for(i=0;i<data.length;i++){
-                insertRentalsByUser(data[i]);
+                insertCopiesByMovie(data[i]);
             }
         }
     };
-    xhr.open("GET","http://api.videostore.fr/videos/6/exemplaires",true);
+    xhr.open("GET","http://api.videostore.fr/videos/10/exemplaires",true);
     xhr.send();
 
     return false;
