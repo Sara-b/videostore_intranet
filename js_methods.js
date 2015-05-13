@@ -542,3 +542,63 @@ function insertRentalsByUser(row){
     var colonne3 = ligne.insertCell(2);
     colonne3.innerHTML += row.return_date;
 }
+
+function getOneMovie() {
+    var data;
+    var xhr = getXMLHttpRequest();
+    
+    xhr.onreadystatechange = function() {
+    
+        if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
+            data = JSON.parse(xhr.responseText);
+
+            var titre = document.getElementById("title");
+            titre.innerHTML = data.title;
+
+            var realisateur = document.getElementById("director");
+            realisateur.innerHTML = "Réalisateur: "+data.director;
+
+            var description = document.getElementById("resum");
+            description.innerHTML = data.description;
+        }
+    };
+    xhr.open("GET","http://api.videostore.fr/videos/6",true);
+    xhr.send();
+
+    return false;
+}
+
+function getCopiesByMovie() {
+    var data;
+    var xhr = getXMLHttpRequest();
+    
+    xhr.onreadystatechange = function() {
+    
+        if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
+            data = JSON.parse(xhr.responseText);
+            console.log(data);
+            for(i=0;i<data.length;i++){
+                insertRentalsByUser(data[i]);
+            }
+        }
+    };
+    xhr.open("GET","http://api.videostore.fr/videos/6/exemplaires",true);
+    xhr.send();
+
+    return false;
+}
+
+function insertCopiesByMovie(row){
+    var tableau = document.getElementById("list_magasins");
+
+    var ligne = tableau.insertRow(-1);//on a ajouté une ligne
+
+    var colonne1 = ligne.insertCell(0);//on a une ajouté une cellule
+    colonne1.innerHTML += row.id;//on y met le contenu de id
+
+    var colonne2 = ligne.insertCell(1);
+    colonne2.innerHTML += row.store;
+    
+    var colonne3 = ligne.insertCell(2);//on ajoute la seconde cellule
+    colonne3.innerHTML += row.status;
+}

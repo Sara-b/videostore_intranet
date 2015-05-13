@@ -93,14 +93,14 @@
                 <div class="col-md-2">
                     <img src="images/add.png" class="img-rounded">
                 </div>
-                <h1>Titre</h1>
-                <h3>Realisateur</h3>
+                <h1 id="title">Titre</h1>
+                <h3 id="director">Realisateur</h3>
                 <div class="col-md-2"></div>
             </div>
 
             <div class="row">
                 <div class="col-md-2"></div>
-                <div class="col-md-8" style="text-align:justify;">
+                <div id="resum" class="col-md-8" style="text-align:justify;">
                     <p>Alors que Tony Stark tente de relancer un programme de maintien de la paix jusque-là suspendu, les choses tournent mal et les super-héros Iron Man, Captain America, Thor, Hulk, Black Widow et Hawkeye vont devoir à nouveau unir leurs forces pour combattre le plus puissant de leurs adversaires : le terrible Ultron, un être technologique terrifiant qui sest juré déradiquer lespèce humaine. Afin dempêcher celui-ci daccomplir ses sombres desseins, des alliances inattendues se scellent, les entraînant dans une incroyable aventure et une haletante course contre le temps </p>
                 </div>
                 <div class="col-md-2"></div>
@@ -115,6 +115,7 @@
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
+                                        <th>#</th>
                                         <th>Magasin</th>
                                         <th>Disponible</th>
                                     </tr>
@@ -151,7 +152,7 @@
     <script src="assets/js/bootstrap.js"></script>
     <script src="js_methods.js"></script>
     <script>
-        //$(document).ready(getMovies());
+        $(document).ready(getOneMovie());
     </script>
 </body>
 </html>
